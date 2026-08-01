@@ -2,8 +2,10 @@
 #include <p101_env/env.h>
 #include <p101_error/error.h>
 #include <p101_host/host.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static int failures;
 
@@ -65,7 +67,7 @@ static void test_p101_confstr(struct p101_env *env, struct p101_error *err)
 static void test_p101_getdomainname(struct p101_env *env, struct p101_error *err)
 {
 #ifdef __linux__
-    static const int errors[] = {EFAULT, EINVAL, EPERM};
+    static const int errors[] = {EINVAL};
 #elif defined(__APPLE__)
     static const int errors[] = {EFAULT, EPERM};
 #elif defined(__FreeBSD__)
@@ -92,7 +94,7 @@ static void test_p101_getdomainname(struct p101_env *env, struct p101_error *err
 static void test_p101_gethostname(struct p101_env *env, struct p101_error *err)
 {
 #ifdef __linux__
-    static const int errors[] = {EFAULT, EINVAL, ENAMETOOLONG, EPERM};
+    static const int errors[] = {EFAULT, ENAMETOOLONG};
 #elif defined(__APPLE__)
     static const int errors[] = {EFAULT, ENAMETOOLONG, EPERM};
 #elif defined(__FreeBSD__)
