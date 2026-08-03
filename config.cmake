@@ -31,7 +31,6 @@ set(p101_host_HEADERS
 set(p101_host_LINK_LIBRARIES
         p101_error
         p101_env
-        p101_tool_event
         p101_c
 )
 
