@@ -22,7 +22,7 @@ size_t p101_confstr(const struct p101_env *env, struct p101_error *err, int name
     size_t ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, 0);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, 0);
     errno   = 0;
     ret_val = confstr(name, buf, len);
 
@@ -31,7 +31,7 @@ size_t p101_confstr(const struct p101_env *env, struct p101_error *err, int name
         P101_ERROR_RAISE_ERRNO(err, errno);
     }
 
-    P101_TRACE_EXIT(env);
+    P101_WRAPPER_DONE(env);
     return ret_val;
 }
 
@@ -40,7 +40,7 @@ int p101_gethostname(const struct p101_env *env, struct p101_error *err, char *n
     int ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, -1);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, -1);
     errno   = 0;
     ret_val = gethostname(name, namelen);
 
@@ -49,7 +49,7 @@ int p101_gethostname(const struct p101_env *env, struct p101_error *err, char *n
         P101_ERROR_RAISE_ERRNO(err, errno);
     }
 
-    P101_TRACE_EXIT(env);
+    P101_WRAPPER_DONE(env);
     return ret_val;
 }
 
@@ -58,7 +58,7 @@ long p101_sysconf(const struct p101_env *env, struct p101_error *err, int name)
     long ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, -1);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, -1);
     errno   = 0;
     ret_val = sysconf(name);
 
@@ -67,6 +67,6 @@ long p101_sysconf(const struct p101_env *env, struct p101_error *err, int name)
         P101_ERROR_RAISE_ERRNO(err, errno);
     }
 
-    P101_TRACE_EXIT(env);
+    P101_WRAPPER_DONE(env);
     return ret_val;
 }

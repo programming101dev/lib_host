@@ -20,16 +20,18 @@
 
 int p101_getdomainname(const struct p101_env *env, struct p101_error *err, char *name, size_t namelen)
 {
+    int p101_single_result_;
     int ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, -1);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, -1);
 #if defined(__APPLE__) || defined(__FreeBSD__)
     if(namelen > (size_t)INT_MAX)
     {
         P101_ERROR_RAISE_ERRNO(err, ERANGE);
-        P101_TRACE_EXIT(env);
-        return -1;
+        P101_WRAPPER_DONE(env);
+        p101_single_result_ = -1;
+        goto p101_single_exit_;
     }
     ret_val = getdomainname(name, (int)namelen);
 #else
@@ -42,21 +44,27 @@ int p101_getdomainname(const struct p101_env *env, struct p101_error *err, char 
     }
 
     P101_TRACE_EXIT(env);
-    return ret_val;
+    p101_single_result_ = ret_val;
+    goto p101_single_exit_;
+
+p101_single_exit_:
+    return p101_single_result_;
 }
 
 int p101_setdomainname(const struct p101_env *env, struct p101_error *err, const char *name, size_t namelen)
 {
+    int p101_single_result_;
     int ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, -1);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, -1);
 #if defined(__APPLE__) || defined(__FreeBSD__)
     if(namelen > (size_t)INT_MAX)
     {
         P101_ERROR_RAISE_ERRNO(err, ERANGE);
-        P101_TRACE_EXIT(env);
-        return -1;
+        P101_WRAPPER_DONE(env);
+        p101_single_result_ = -1;
+        goto p101_single_exit_;
     }
     ret_val = setdomainname(name, (int)namelen);
 #else
@@ -69,5 +77,9 @@ int p101_setdomainname(const struct p101_env *env, struct p101_error *err, const
     }
 
     P101_TRACE_EXIT(env);
-    return ret_val;
+    p101_single_result_ = ret_val;
+    goto p101_single_exit_;
+
+p101_single_exit_:
+    return p101_single_result_;
 }

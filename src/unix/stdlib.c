@@ -29,7 +29,7 @@ int p101_getloadavg(const struct p101_env *env, struct p101_error *err, double l
     int ret_val;
 
     P101_TRACE(env);
-    P101_WRAPPER_FAULT_RETURN(env, err, -1);
+    P101_WRAPPER_FAULT_RETURN(env, err, ret_val, -1);
     caller_errno = errno;
     errno        = 0;
     ret_val      = getloadavg(loadavg, nelem);
@@ -44,6 +44,6 @@ int p101_getloadavg(const struct p101_env *env, struct p101_error *err, double l
         errno = caller_errno;
     }
 
-    P101_TRACE_EXIT(env);
+    P101_WRAPPER_DONE(env);
     return ret_val;
 }
