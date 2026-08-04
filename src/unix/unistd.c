@@ -20,7 +20,6 @@
 
 int p101_getdomainname(const struct p101_env *env, struct p101_error *err, char *name, size_t namelen)
 {
-    int p101_single_result_;
     int ret_val;
 
     P101_TRACE(env);
@@ -29,31 +28,30 @@ int p101_getdomainname(const struct p101_env *env, struct p101_error *err, char 
     if(namelen > (size_t)INT_MAX)
     {
         P101_ERROR_RAISE_ERRNO(err, ERANGE);
-        P101_WRAPPER_DONE(env);
-        p101_single_result_ = -1;
-        goto p101_single_exit_;
+        ret_val = -1;
     }
-    ret_val = getdomainname(name, (int)namelen);
+    else
+    {
+        ret_val = getdomainname(name, (int)namelen);
+        if(ret_val == -1)
+        {
+            P101_ERROR_RAISE_ERRNO(err, errno);
+        }
+    }
 #else
     ret_val = getdomainname(name, namelen);
-#endif
-
     if(ret_val == -1)
     {
         P101_ERROR_RAISE_ERRNO(err, errno);
     }
+#endif
 
-    P101_TRACE_EXIT(env);
-    p101_single_result_ = ret_val;
-    goto p101_single_exit_;
-
-p101_single_exit_:
-    return p101_single_result_;
+    P101_WRAPPER_DONE(env);
+    return ret_val;
 }
 
 int p101_setdomainname(const struct p101_env *env, struct p101_error *err, const char *name, size_t namelen)
 {
-    int p101_single_result_;
     int ret_val;
 
     P101_TRACE(env);
@@ -62,24 +60,24 @@ int p101_setdomainname(const struct p101_env *env, struct p101_error *err, const
     if(namelen > (size_t)INT_MAX)
     {
         P101_ERROR_RAISE_ERRNO(err, ERANGE);
-        P101_WRAPPER_DONE(env);
-        p101_single_result_ = -1;
-        goto p101_single_exit_;
+        ret_val = -1;
     }
-    ret_val = setdomainname(name, (int)namelen);
+    else
+    {
+        ret_val = setdomainname(name, (int)namelen);
+        if(ret_val == -1)
+        {
+            P101_ERROR_RAISE_ERRNO(err, errno);
+        }
+    }
 #else
     ret_val = setdomainname(name, namelen);
-#endif
-
     if(ret_val == -1)
     {
         P101_ERROR_RAISE_ERRNO(err, errno);
     }
+#endif
 
-    P101_TRACE_EXIT(env);
-    p101_single_result_ = ret_val;
-    goto p101_single_exit_;
-
-p101_single_exit_:
-    return p101_single_result_;
+    P101_WRAPPER_DONE(env);
+    return ret_val;
 }
