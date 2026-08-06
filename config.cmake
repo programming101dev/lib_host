@@ -19,11 +19,7 @@ set(BSD_STANDARD_FLAGS -D_BSD_SOURCE -D__BSD_VISIBLE)
 
 set(LIBRARY_TARGETS p101_host)
 set(p101_host_SOURCES
-        src/posix/sys/utsname.c
-        src/posix/unistd.c
-        src/posix_xsi/unistd.c
-        src/unix/stdlib.c
-        src/unix/unistd.c
+        src/host.c
 )
 set(p101_host_HEADERS
         include/p101_host/host.h
