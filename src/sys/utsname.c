@@ -35,8 +35,6 @@
  * limitations under the License.
  */
 
-#include <p101_env/wrapper.h>
-
 int p101_uname(const struct p101_env *env, struct p101_error *err, struct utsname *name)
 {
     int ret_val;
