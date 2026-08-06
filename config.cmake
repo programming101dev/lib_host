@@ -19,10 +19,14 @@ set(BSD_STANDARD_FLAGS -D_BSD_SOURCE -D__BSD_VISIBLE)
 
 set(LIBRARY_TARGETS p101_host)
 set(p101_host_SOURCES
-        src/host.c
+        src/stdlib.c
+        src/sys/utsname.c
+        src/unistd.c
 )
 set(p101_host_HEADERS
-        include/p101_host/host.h
+        include/p101_host/p101_stdlib.h
+        include/p101_host/p101_unistd.h
+        include/p101_host/sys/p101_utsname.h
 )
 set(p101_host_LINK_LIBRARIES
         p101_error
