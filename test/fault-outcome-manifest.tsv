@@ -1,0 +1,8 @@
+function	function_usr	domain	symbol_header	linux_faults	macos_faults	freebsd_faults	posix_faults	linux_conditional	macos_conditional	freebsd_conditional
+p101_confstr	c:@F@p101_confstr	errno	errno.h	EINVAL	EINVAL,EIO,ENOMEM	EINVAL	EINVAL			
+p101_getdomainname	c:@F@p101_getdomainname	errno	errno.h	EINVAL	EFAULT,EPERM	EFAULT,EPERM	EIO			
+p101_gethostname	c:@F@p101_gethostname	errno	errno.h	EFAULT,ENAMETOOLONG	EFAULT,ENAMETOOLONG,EPERM	EFAULT,ENAMETOOLONG,EPERM	EIO			
+p101_getloadavg	c:@F@p101_getloadavg	errno	errno.h	EIO	EIO	EIO	EIO			
+p101_setdomainname	c:@F@p101_setdomainname	errno	errno.h	EFAULT,EINVAL,EPERM	EFAULT,EPERM	EFAULT,EPERM	EIO			
+p101_sysconf	c:@F@p101_sysconf	errno	errno.h	EINVAL	EINVAL	EINVAL	EINVAL			
+p101_uname	c:@F@p101_uname	errno	errno.h	EFAULT	EIO	EIO	EIO			
